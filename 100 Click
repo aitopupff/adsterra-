@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Link Opener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #5a5a5a;
+        }
+        .counter {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .status {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Auto Link Opener</h1>
+    <p>এই স্ক্রিপ্টটি ১ সেকেন্ড পর পর একটি নির্দিষ্ট লিংক ওপেন করবে এবং মোট ১০০ বার করবে।</p>
+
+    <p class="counter">লিংক ওপেন হয়েছে: <span id="linkCount">0</span> বার</p>
+
+    <div class="status" id="statusMessage"></div>
+
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+
+    <script>
+        let linkCount = 0;
+        const maxLinks = 100;
+        let intervalId;
+
+        function openLink() {
+            if (linkCount < maxLinks) {
+                window.open("https://www.profitableratecpm.com/w9iiya2twj?key=71d88c9e151500e7643817cec210484b"); // এখানে আপনার লিংক দিন
+                linkCount++;
+                document.getElementById("linkCount").innerText = linkCount;
+            } else {
+                clearInterval(intervalId);
+                document.getElementById("statusMessage").innerText = "সব লিংক ওপেন সম্পন্ন হয়েছে!";
+                document.getElementById("startBtn").disabled = false;
+                document.getElementById("stopBtn").disabled = true;
+            }
+        }
+
+        document.getElementById("startBtn").addEventListener("click", function() {
+            linkCount = 0;
+            document.getElementById("linkCount").innerText = linkCount;
+            document.getElementById("statusMessage").innerText = "";
+
+            this.disabled = true;
+            document.getElementById("stopBtn").disabled = false;
+
+            intervalId = setInterval(openLink, 1000); // ১ সেকেন্ড পর পর লিংক ওপেন হবে
+        });
+
+        document.getElementById("stopBtn").addEventListener("click", function() {
+            clearInterval(intervalId);
+            document.getElementById("statusMessage").innerText = "লিংক ওপেন করা বন্ধ করা হয়েছে!";
+            document.getElementById("startBtn").disabled = false;
+            this.disabled = true;
+        });
+    </script>
+
+</body>
+</html>
